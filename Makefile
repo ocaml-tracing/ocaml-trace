@@ -14,6 +14,12 @@ test-autopromote:
 doc:
 	@dune build $(DUNE_OPTS) @doc
 
+format:
+	@dune build @fmt --auto-promote
+
+format-check:
+	@dune build @fmt --ignore-promoted-rules
+
 WATCH?= @install @runtest
 watch:
 	dune build $(DUNE_OPTS) -w $(WATCH)
