@@ -20,8 +20,8 @@
 
 (test
  (name t_runtime_events)
+ (package trace-runtime-events)
  (modules t_runtime_events)
- (optional) ; runtime_events
  (preprocess
   (pps ppx_trace))
  (libraries trace trace-runtime-events runtime_events))
