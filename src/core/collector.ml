@@ -82,8 +82,7 @@ end
     This is only relevant to implementors of tracing backends; to instrument
     your code you only need to look at the {!Trace} module.
 
-    The definition changed since 0.11 to a record of callbacks + a state
-*)
+    The definition changed since 0.11 to a record of callbacks + a state *)
 type t =
   | C_none  (** No collector. *)
   | C_some : 'st * 'st Callbacks.t -> t

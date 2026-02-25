@@ -180,6 +180,22 @@ val counter_float :
       {!set_default_level}.
     @param data metadata for this metric (since 0.4) *)
 
+val current_span : unit -> span option
+(** Access the current span from some ambient scope, {b if supported}. This is
+    only supported if a {!Ambient_span_provider} has been set up.
+    @since NEXT_RELEASE *)
+
+val with_current_span_set_to : span -> (span -> 'a) -> 'a
+(** [with_current_span_set_to span f] sets the span as current span, enters
+    [f span], and restores the previous current span (if any).
+
+    This is only supported if a {!Ambient_span_provider} has been set up,
+    otherwise it is a no-op.
+
+    Automatically called by {!with_span}.
+
+    @since NEXT_RELEASE *)
+
 (** {2 Collector} *)
 
 type collector = Collector.t
