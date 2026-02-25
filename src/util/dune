@@ -17,10 +17,10 @@
    (unix -> time_util.unix.ml)
    (-> time_util.dummy.ml))
   (select
-    unix_util.ml
-    from
-    (unix -> unix_util.real.ml)
-    (-> unix_util.dummy.ml))
+   unix_util.ml
+   from
+   (unix -> unix_util.real.ml)
+   (-> unix_util.dummy.ml))
   (select
    domain_util.ml
    from

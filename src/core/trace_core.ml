@@ -15,6 +15,10 @@ let collector : collector A.t = A.make Collector.C_none
 let default_level_ = A.make Level.Trace
 let current_level_ = A.make Level.Trace
 
+(** Global provider of span context *)
+let ambient_span_provider : Ambient_span_provider.t A.t =
+  A.make Ambient_span_provider.ASP_none
+
 (* ## implementation ## *)
 
 let data_empty_build_ () = []
@@ -26,6 +30,16 @@ let[@inline] get_current_level () = A.get current_level_
 
 let[@inline] check_level_ ~level st (cbs : _ Collector.Callbacks.t) : bool =
   Level.leq level (A.get current_level_) && cbs.enabled st level
+
+let[@inline] current_span () =
+  match A.get ambient_span_provider with
+  | ASP_none -> None
+  | ASP_some (st, cbs) -> cbs.get_current_span st
+
+let[@inline] with_current_span_set_to sp f =
+  match A.get ambient_span_provider with
+  | ASP_none -> f sp
+  | ASP_some (st, cbs) -> cbs.with_current_span_set_to st sp f
 
 let parent_of_span_opt_opt = function
   | None -> P_unknown
@@ -46,7 +60,10 @@ let with_span_collector_ st (cbs : _ Collector.Callbacks.t) ?__FUNCTION__
     enter_span_st st cbs ?__FUNCTION__ ~__FILE__ ~__LINE__ ~level ?parent
       ?params ?data name
   in
-  match f sp with
+  match
+    (* set [sp] as current span before calling [f sp] *)
+    with_current_span_set_to sp f
+  with
   | res ->
     cbs.exit_span st sp;
     res
