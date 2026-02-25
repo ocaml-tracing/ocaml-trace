@@ -21,6 +21,11 @@ let ambient_span_provider : Ambient_span_provider.t A.t =
 
 (* ## implementation ## *)
 
+let[@inline] option_or_ a f =
+  match a with
+  | Some _ -> a
+  | None -> f ()
+
 let data_empty_build_ () = []
 let[@inline] enabled () = Collector.is_some (A.get collector)
 let[@inline] get_default_level () = A.get default_level_
@@ -42,7 +47,10 @@ let[@inline] with_current_span_set_to sp f =
   | ASP_some (st, cbs) -> cbs.with_current_span_set_to st sp f
 
 let parent_of_span_opt_opt = function
-  | None -> P_unknown
+  | None ->
+    (match current_span () with
+    | None -> P_unknown
+    | Some p -> P_some p)
   | Some None -> P_none
   | Some (Some p) -> P_some p
 
@@ -110,6 +118,7 @@ let[@inline] add_data_to_span sp data : unit =
 let message_collector_ st (cbs : _ Collector.Callbacks.t) ~level ?span
     ?(params = []) ?(data = data_empty_build_) msg : unit =
   let data = data () in
+  let span = option_or_ span current_span in
   cbs.message st ~level ~span ~params ~data msg
 
 let[@inline] message ?(level = A.get default_level_) ?span ?params ?data msg :
