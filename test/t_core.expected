@@ -1,0 +1,19 @@
+=== level filtering ===
+enter(error-span)
+enter(info-span)
+msg(warn-msg)
+=== manual enter/exit ===
+enter(manual)
+exit
+=== exception safety ===
+enter(risky)
+exit
+=== no collector ===
+ok
+=== double setup ===
+caught: trace: collector already present
+=== metrics ===
+metric(my_int,42)
+metric(my_float,3.14)
+=== with_setup_collector exception safety ===
+shutdown called: true
