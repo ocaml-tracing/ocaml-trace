@@ -1,23 +1,22 @@
-(executables
- (names t1 t2 t_debug t_core)
- (modules t1 t2 t_debug t_core)
- (libraries trace))
 
-(executables
- (names t_runtime_events)
+(tests
+ (names t1 t_core t_debug)
+ (modules t1 t_core t_debug)
+ (package trace-tef)
+ (libraries trace trace-tef))
+
+(test
+ (name t2)
+ (package ppx_trace)
+ (modules t2)
+ (preprocess
+  (pps ppx_trace))
+ (libraries trace-tef))
+
+(test
+ (name t_runtime_events)
+ (package trace-runtime-events)
  (modules t_runtime_events)
- (enabled_if
-  (>= %{ocaml_version} 5))
- (libraries trace trace.runtime-events))
-
-(rule
- (target t_core.output)
- (action
-  (with-stdout-to
-   t_core.output
-   (run %{exe:t_core.exe}))))
-
-(rule
- (alias runtest)
- (action
-  (diff t_core.expected t_core.output)))
+ (preprocess
+  (pps ppx_trace))
+ (libraries trace trace-runtime-events runtime_events))
