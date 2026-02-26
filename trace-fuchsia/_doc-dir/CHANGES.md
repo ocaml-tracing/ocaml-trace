@@ -1,3 +1,12 @@
+# 0.12
+
+- use `current_span` when entering spans or sending messages
+- add `Trace.Ambient_span_provider.t` concept, to track the current span.
+    It is not part of the collector and is optional.
+- add `trace.thread-local-storage` optional library that implements the `Ambient_span_provider.t`
+- add a runtime events collector, + test, in `trace-runtime-events`
+- add `{thread,process}_sort_index` extension + TEF support
+
 # 0.11
 
 - entire rework of the collector, now lighter, and using an open sum type
