@@ -4,7 +4,7 @@
 
 (generate_opam_files true)
 
-(version 0.11)
+(version 0.12)
 
 (source
  (github ocaml-tracing/ocaml-trace))
@@ -98,9 +98,10 @@
   "A simple collector relying on runtime-events for OCaml 5. Some assembly required.")
  (depends
   (ocaml
-   (>= 5.0))
+   (>= 5.1))
   (trace
    (= :version))
+  (ppx_trace (and (= :version) :with-test))
   base-bigarray
   base-unix
   dune)

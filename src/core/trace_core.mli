@@ -184,7 +184,7 @@ val counter_float :
 val current_span : unit -> span option
 (** Access the current span from some ambient scope, {b if supported}. This is
     only supported if a {!Ambient_span_provider} has been set up.
-    @since NEXT_RELEASE *)
+    @since 0.12 *)
 
 val with_current_span_set_to : span -> (span -> 'a) -> 'a
 (** [with_current_span_set_to span f] sets the span as current span, enters
@@ -195,7 +195,7 @@ val with_current_span_set_to : span -> (span -> 'a) -> 'a
 
     Automatically called by {!with_span}.
 
-    @since NEXT_RELEASE *)
+    @since 0.12 *)
 
 (** {2 Collector} *)
 
@@ -230,7 +230,7 @@ val with_setup_collector : Collector.t -> (unit -> 'a) -> 'a
 val set_ambient_context_provider : Ambient_span_provider.t -> unit
 (** Install a provider for {!current_span} and {!with_current_span_set_to}. The
     default provider does nothing (ie [current_span ()] is always [None]).
-    @since NEXT_RELEASE *)
+    @since 0.12 *)
 
 (** {2 Extensions} *)
 

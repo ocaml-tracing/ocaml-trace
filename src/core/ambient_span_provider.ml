@@ -1,5 +1,5 @@
 (** Access/set the current span from some ambient context.
-    @since NEXT_RELEASE *)
+    @since 0.12 *)
 
 open Types
 

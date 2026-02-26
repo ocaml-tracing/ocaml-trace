@@ -1,6 +1,6 @@
 (** Simple collector that emits trace events via Runtime_events.
 
-    @since NEXT_RELEASE *)
+    @since 0.12 *)
 
 (** {2 Event types for decoding} *)
 
