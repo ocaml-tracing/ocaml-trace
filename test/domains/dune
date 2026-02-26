@@ -1,0 +1,28 @@
+; Marker library: only present on OCaml 5+, used as a proxy for Domain availability.
+
+(library
+ (name ocaml5)
+ (modules ocaml5)
+ (enabled_if
+  (>= %{ocaml_version} 5)))
+
+(executable
+ (name t_domains)
+ (modules t_domains)
+ (libraries
+  trace
+  ; use the marker library to pick between the real test and the quine fallback.
+  (select
+   t_domains.ml
+   from
+   (ocaml5 threads -> t_domains.real.ml)
+   (-> t_domains.quine.ml))))
+
+(rule
+ (alias runtest)
+ (action
+  (progn
+   (with-stdout-to
+    t_domains.output
+    (run %{exe:t_domains.exe} %{dep:t_domains.expected}))
+   (diff t_domains.expected t_domains.output))))

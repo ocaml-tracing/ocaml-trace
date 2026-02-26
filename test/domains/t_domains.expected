@@ -1,0 +1,5 @@
+=== domain concurrency ===
+domain-0: enter=10000 exit=10000 msg=10000
+domain-1: enter=10000 exit=10000 msg=10000
+domain-2: enter=10000 exit=10000 msg=10000
+domain-3: enter=10000 exit=10000 msg=10000
