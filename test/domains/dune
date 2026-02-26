@@ -20,6 +20,7 @@
 
 (rule
  (alias runtest)
+ (package trace)
  (action
   (progn
    (with-stdout-to
