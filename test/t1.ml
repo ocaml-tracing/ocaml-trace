@@ -1,3 +1,5 @@
+module Trace = Trace_core
+
 let run () =
   Trace.set_process_name "main";
   Trace.set_thread_name "t1";
