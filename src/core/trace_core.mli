@@ -7,6 +7,7 @@
 include module type of Types
 module Collector = Collector
 module Level = Level
+module Ambient_span_provider = Ambient_span_provider
 
 (**/**)
 
@@ -223,6 +224,13 @@ val with_setup_collector : Collector.t -> (unit -> 'a) -> 'a
 (** [with_setup_collector c f] installs [c], calls [f()], and shutdowns [c] once
     [f()] is done.
     @since 0.11 *)
+
+(** {2 ambient span provider} *)
+
+val set_ambient_context_provider : Ambient_span_provider.t -> unit
+(** Install a provider for {!current_span} and {!with_current_span_set_to}. The
+    default provider does nothing (ie [current_span ()] is always [None]).
+    @since NEXT_RELEASE *)
 
 (** {2 Extensions} *)
 

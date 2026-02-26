@@ -3,6 +3,7 @@ module A = Atomic_
 module Collector = Collector
 module Level = Level
 module Core_ext = Core_ext
+module Ambient_span_provider = Ambient_span_provider
 
 type collector = Collector.t
 
@@ -174,6 +175,8 @@ let shutdown () =
 let with_setup_collector c f =
   setup_collector c;
   Fun.protect ~finally:shutdown f
+
+let set_ambient_context_provider p = A.set ambient_span_provider p
 
 type extension_event = Types.extension_event = ..
 

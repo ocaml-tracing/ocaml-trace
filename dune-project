@@ -29,6 +29,7 @@
   dune)
  (depopts
   unix
+  (thread-local-storage (>= 0.2))
   (mtime
    (>= 2.0)))
  (tags
