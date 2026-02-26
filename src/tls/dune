@@ -1,7 +1,6 @@
-
 (library
-  (name trace_thread_local_storage)
-  (public_name trace.thread-local-storage)
-  (synopsis "Use thread-local-storage for ambient spans")
-  (optional) ; thread-local-storage
-  (libraries trace.core thread-local-storage))
+ (name trace_thread_local_storage)
+ (public_name trace.thread-local-storage)
+ (synopsis "Use thread-local-storage for ambient spans")
+ (optional) ; thread-local-storage
+ (libraries trace.core thread-local-storage))

@@ -1,0 +1,21 @@
+(executable
+ (name t_tls)
+ (modules t_tls)
+ (libraries
+  trace
+  ; avoid using a recent dune with `enabled-if`, by just using `select` instead.
+  ; the dummy case just echoes back the expected file.
+  (select
+   t_tls.ml
+   from
+   (trace.thread-local-storage -> t_tls.real.ml)
+   (-> t_tls.quine.ml))))
+
+(rule
+ (alias runtest)
+ (action
+  (progn
+   (with-stdout-to
+    t_tls.output
+    (run %{exe:t_tls.exe} %{dep:t_tls.expected}))
+   (diff t_tls.expected t_tls.output))))
