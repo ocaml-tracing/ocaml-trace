@@ -47,7 +47,7 @@ jobs:
       - run: opam exec -- dune runtest -p trace-tef,trace-fuchsia
 
       # with depopts
-      - run: opam install hmap
+      - run: opam install hmap thread-local-storage
       - run: opam exec -- dune build '@install' -p trace,trace-tef,trace-fuchsia
 
       - run: opam install picos_aux

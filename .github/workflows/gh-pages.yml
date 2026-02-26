@@ -24,7 +24,7 @@ jobs:
       - run: opam pin odoc 3.1.0 -y -n
         # crash with 2.4, see https://github.com/ocaml/odoc/issues/1066
       - name: Deps
-        run: opam install odig trace trace-tef trace-fuchsia ppx_trace
+        run: opam install odig thread-local-storage trace trace-tef trace-fuchsia ppx_trace
 
       - name: Build
         run: opam exec -- odig odoc --cache-dir=_doc/ trace trace-tef trace-fuchsia ppx_trace
