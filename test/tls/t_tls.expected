@@ -1,0 +1,5 @@
+=== ambient span (TLS) ===
+before any span: none
+in outer: outer
+in inner: inner
+after inner exits: outer
