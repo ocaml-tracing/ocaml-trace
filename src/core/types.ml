@@ -1,7 +1,9 @@
 (** Main type definitions *)
 
 type span = ..
-(** A span. Its representation is defined by the current collector. *)
+(** A span. Its representation is defined by the current collector.
+
+    This representation changed in 0.11 (from [int64] to an open sum type) *)
 
 (** Information about a span's parent span, if any.
     @since 0.11 *)
