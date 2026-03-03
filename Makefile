@@ -24,7 +24,16 @@ WATCH?= @install @runtest
 watch:
 	dune build $(DUNE_OPTS) -w $(WATCH)
 
-.PHONY: test clean watch
+# to build diagrams
+install-d2:
+	go install oss.terrastruct.com/d2@latest
+
+diagrams: media/architecture.svg
+
+media/architecture.svg: media/architecture.d2
+	d2 $< $@
+
+.PHONY: test clean watch diagrams
 
 VERSION=$(shell awk '/^version:/ {print $$2}' trace.opam)
 

@@ -1,0 +1,188 @@
+direction: down
+
+# ── User Code ──────────────────────────────────────────────────────────────
+user: Library / Application Code {
+  shape: rectangle
+  style.fill: "#f8f8f8"
+  style.stroke: "#aaaaaa"
+  style.font-size: 14
+}
+
+# ── ocaml-trace ────────────────────────────────────────────────────────────
+trace_pkg: ocaml-trace {
+  style.fill: "#dbeafe"
+  style.stroke: "#3b82f6"
+
+  core: trace.core {
+    label: "trace.core\n─────────────────────\nTypes: span, metric, user_data\nLevel (Error → Trace)\nCoreExt (extensions)"
+    style.fill: "#bfdbfe"
+
+    collector: Collector {
+      label: "Collector\nenter/exit span\nmessage • metric\nenabled • shutdown"
+      style.fill: "#93c5fd"
+    }
+
+    asp: AmbientSpanProvider {
+      label: "AmbientSpanProvider\nget_current_span\nwith_current_span_set_to"
+      style.fill: "#93c5fd"
+    }
+  }
+
+  ppx: ppx_trace {
+    label: "ppx_trace\nlet%trace syntax"
+    style.fill: "#bfdbfe"
+  }
+
+  debug: trace.debug {
+    label: "trace.debug\nTrack_spans\n(detect unclosed)"
+    style.fill: "#bfdbfe"
+  }
+}
+
+# ── Local Backends ─────────────────────────────────────────────────────────
+backends: Local Backends {
+  style.fill: "#fef9c3"
+  style.stroke: "#ca8a04"
+
+  tef: trace-tef {
+    label: "trace-tef\n────────────────\nChrome / TEF JSON\n→ Perfetto UI\n→ chrome://tracing"
+    style.fill: "#fef08a"
+  }
+
+  fuchsia: trace-fuchsia {
+    label: "trace-fuchsia\n────────────\nFuchsia binary format\nhigh-throughput\n→ Perfetto UI"
+    style.fill: "#fef08a"
+  }
+
+  tef_tldrs: trace-tef.tldrs {
+    label: "trace-tef.tldrs\n──────────────\nmulti-process via\ntldrs daemon"
+    style.fill: "#fef08a"
+  }
+
+  runtime_ev: trace-runtime-events {
+    label: "trace-runtime-events\n────────────────────\nOCaml Runtime_events\n(custom event types)"
+    style.fill: "#fef08a"
+  }
+
+  tls_asp: trace.tls {
+    label: "trace.tls\n─────────\nThread-local\nambient span"
+    style.fill: "#fef08a"
+  }
+
+  tef_tldrs -> tef: wraps
+}
+
+# ── ambient-context ────────────────────────────────────────────────────────
+ambient: ambient-context {
+  style.fill: "#dcfce7"
+  style.stroke: "#16a34a"
+
+  core: ambient-context {
+    label: "ambient-context\n──────────────────\nPluggable context storage\n(Hmap-based, type-safe)"
+    style.fill: "#bbf7d0"
+  }
+
+  tls: ambient-context.tls {
+    label: "tls\nThread-local"
+    style.fill: "#bbf7d0"
+  }
+
+  lwt: ambient-context-lwt {
+    label: "lwt\nLwt fiber-local\n(sequence-assoc)"
+    style.fill: "#bbf7d0"
+  }
+
+  eio: ambient-context-eio {
+    label: "eio\nEio fiber-local"
+    style.fill: "#bbf7d0"
+  }
+
+  picos: ambient-context-picos {
+    label: "picos\nEffects-based"
+    style.fill: "#bbf7d0"
+  }
+
+  tls -> core: implements
+  lwt -> core: implements
+  eio -> core: implements
+  picos -> core: implements
+}
+
+# ── ocaml-opentelemetry ────────────────────────────────────────────────────
+otel: ocaml-opentelemetry {
+  style.fill: "#fce7f3"
+  style.stroke: "#db2777"
+
+  bridge: opentelemetry.trace {
+    label: "opentelemetry.trace\n──────────────────────────────\nconverts trace spans → OTLP\nvia Scope + ambient-context"
+    style.fill: "#fbcfe8"
+  }
+
+  core: opentelemetry {
+    label: "opentelemetry\n─────────────\nOTLP API\nTrace • Metrics • Logs\nScope • Span context\nProtobuf wire format"
+    style.fill: "#fbcfe8"
+  }
+
+  ocurl: client-ocurl {
+    label: "client-ocurl\ncurl + threads"
+    style.fill: "#fbcfe8"
+  }
+
+  cohttp_lwt: client-cohttp-lwt {
+    label: "client-cohttp-lwt\nLwt async HTTP"
+    style.fill: "#fbcfe8"
+  }
+
+  cohttp_eio: client-cohttp-eio {
+    label: "client-cohttp-eio\nEio structured concurrency"
+    style.fill: "#fbcfe8"
+  }
+
+  bridge -> core: converts spans\nmetrics • logs
+  ocurl -> core: OTLP/HTTP
+  cohttp_lwt -> core: OTLP/HTTP
+  cohttp_eio -> core: OTLP/HTTP
+}
+
+# ── External outputs ───────────────────────────────────────────────────────
+otlp_backend: OTLP Collectors {
+  label: "OTLP Backends\nJaeger • Grafana Tempo\nDatadog • Honeycomb\n…"
+  shape: cylinder
+  style.fill: "#f3f4f6"
+  style.stroke: "#6b7280"
+}
+
+perfetto: Perfetto UI {
+  label: "Perfetto UI\nui.perfetto.dev"
+  shape: oval
+  style.fill: "#f3f4f6"
+  style.stroke: "#6b7280"
+}
+
+# ── Connections ────────────────────────────────────────────────────────────
+
+# User code → trace API
+user -> trace_pkg.core: instruments with
+user -> trace_pkg.ppx: or uses (optional)
+
+# Local backends implement trace.core interfaces
+backends.tef -> trace_pkg.core.collector: implements
+backends.fuchsia -> trace_pkg.core.collector: implements
+backends.runtime_ev -> trace_pkg.core.collector: implements
+backends.tls_asp -> trace_pkg.core.asp: implements
+
+# ambient-context as AmbientSpanProvider
+ambient.core -> trace_pkg.core.asp: implements
+
+# OpenTelemetry bridge implements both interfaces
+otel.bridge -> trace_pkg.core.collector: implements
+otel.bridge -> trace_pkg.core.asp: implements
+otel.bridge -> ambient.core: uses for\nspan propagation
+otel.core -> ambient.core: uses\n(Scope storage)
+
+# Export paths
+otel.ocurl -> otlp_backend: OTLP/HTTP
+otel.cohttp_lwt -> otlp_backend: OTLP/HTTP
+otel.cohttp_eio -> otlp_backend: OTLP/HTTP
+backends.tef -> perfetto: JSON traces
+backends.fuchsia -> perfetto: binary traces
