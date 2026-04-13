@@ -3,8 +3,7 @@
  (modules t_tls)
  (libraries
   trace
-  ; avoid using a recent dune with `enabled-if`, by just using `select` instead.
-  ; the dummy case just echoes back the expected file.
+  test_trace_common
   (select
    t_tls.ml
    from
