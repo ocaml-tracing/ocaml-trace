@@ -22,13 +22,14 @@
  (synopsis
   "A lightweight stub for tracing/observability, agnostic in how data is collected")
  (description
-  "ocaml-trace can be used to instrument libraries and programs with low overhead.\n\n              It doesn't do any IO unless a collector is plugged in, which only\n              the final executable should do.")
+  "ocaml-trace can be used to instrument libraries and programs with low overhead. It doesn't do any IO unless a collector is plugged in, which only the final executable should do.")
  (depends
   (ocaml
    (>= 4.08))
   dune)
  (depopts
   unix
+  lwt
   (thread-local-storage (>= 0.2))
   (mtime
    (>= 2.0)))
