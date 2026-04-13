@@ -1,0 +1,21 @@
+(executable
+ (name t_lwt)
+ (modules t_lwt)
+ (libraries
+  trace
+  test_trace_common
+  (select
+   t_lwt.ml
+   from
+   (trace.lwt lwt.unix -> t_lwt.real.ml)
+   (-> t_lwt.quine.ml))))
+
+(rule
+ (alias runtest)
+ (package trace)
+ (action
+  (progn
+   (with-stdout-to
+    t_lwt.output
+    (run %{exe:t_lwt.exe} %{dep:t_lwt.expected}))
+   (diff t_lwt.expected t_lwt.output))))
