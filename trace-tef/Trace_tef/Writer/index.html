@@ -6,7 +6,7 @@
   <span><span class="label">start</span>:float <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">end_</span>:float <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">args</span>:<span><span>(string * <a href="../../../trace/Trace_core/index.html#type-user_data">Trace_core.user_data</a>)</span> list</span> <span class="arrow">&#45;&gt;</span></span>
-  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
   unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_begin_async"><a href="#val-emit_begin_async" class="anchor"></a><code><span><span class="keyword">val</span> emit_begin_async : 
   <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span>
@@ -14,7 +14,7 @@
   <span><span class="label">trace_id</span>:<a href="../Types/index.html#type-trace_id">Types.trace_id</a> <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">ts</span>:float <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">args</span>:<span><span>(string * <a href="../../../trace/Trace_core/index.html#type-user_data">Trace_core.user_data</a>)</span> list</span> <span class="arrow">&#45;&gt;</span></span>
-  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
   unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_end_async"><a href="#val-emit_end_async" class="anchor"></a><code><span><span class="keyword">val</span> emit_end_async : 
   <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span>
@@ -22,29 +22,19 @@
   <span><span class="label">trace_id</span>:<a href="../Types/index.html#type-trace_id">Types.trace_id</a> <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">ts</span>:float <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">args</span>:<span><span>(string * <a href="../../../trace/Trace_core/index.html#type-user_data">Trace_core.user_data</a>)</span> list</span> <span class="arrow">&#45;&gt;</span></span>
-  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
   unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_instant_event"><a href="#val-emit_instant_event" class="anchor"></a><code><span><span class="keyword">val</span> emit_instant_event : 
   <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">name</span>:string <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">ts</span>:float <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">args</span>:<span><span>(string * <a href="../../../trace/Trace_core/index.html#type-user_data">Trace_core.user_data</a>)</span> list</span> <span class="arrow">&#45;&gt;</span></span>
-  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
-  unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_name_thread"><a href="#val-emit_name_thread" class="anchor"></a><code><span><span class="keyword">val</span> emit_name_thread : 
-  <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span>
-  <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span>
-  <span><span class="label">name</span>:string <span class="arrow">&#45;&gt;</span></span>
-  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
-  unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_name_process"><a href="#val-emit_name_process" class="anchor"></a><code><span><span class="keyword">val</span> emit_name_process : <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span> <span><span class="label">name</span>:string <span class="arrow">&#45;&gt;</span></span> <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span> unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_process_sort_index"><a href="#val-emit_process_sort_index" class="anchor"></a><code><span><span class="keyword">val</span> emit_process_sort_index : <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span> unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_thread_sort_index"><a href="#val-emit_thread_sort_index" class="anchor"></a><code><span><span class="keyword">val</span> emit_thread_sort_index : 
-  <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span>
-  <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span>
-  <span>int <span class="arrow">&#45;&gt;</span></span>
-  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
-  unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_counter"><a href="#val-emit_counter" class="anchor"></a><code><span><span class="keyword">val</span> emit_counter : 
+  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
+  unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_name_thread"><a href="#val-emit_name_thread" class="anchor"></a><code><span><span class="keyword">val</span> emit_name_thread : <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span> <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span> <span><span class="label">name</span>:string <span class="arrow">&#45;&gt;</span></span> <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span> unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_name_process"><a href="#val-emit_name_process" class="anchor"></a><code><span><span class="keyword">val</span> emit_name_process : <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span> <span><span class="label">name</span>:string <span class="arrow">&#45;&gt;</span></span> <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span> unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_process_sort_index"><a href="#val-emit_process_sort_index" class="anchor"></a><code><span><span class="keyword">val</span> emit_process_sort_index : <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span> unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_thread_sort_index"><a href="#val-emit_thread_sort_index" class="anchor"></a><code><span><span class="keyword">val</span> emit_thread_sort_index : <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span> <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span> unit</span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-emit_counter"><a href="#val-emit_counter" class="anchor"></a><code><span><span class="keyword">val</span> emit_counter : 
   <span><span class="label">pid</span>:int <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">tid</span>:int <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">name</span>:string <span class="arrow">&#45;&gt;</span></span>
   <span><span class="label">ts</span>:float <span class="arrow">&#45;&gt;</span></span>
-  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Stdlib.Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><a href="../../../ocaml/Stdlib/Buffer/index.html#type-t">Buffer.t</a> <span class="arrow">&#45;&gt;</span></span>
   <span>float <span class="arrow">&#45;&gt;</span></span>
   unit</span></code></div></div></div></body></html>
