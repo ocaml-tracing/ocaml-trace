@@ -1,0 +1,10 @@
+=== ambient span (Lwt) ===
+before any span: none
+sync outer: sync-outer
+sync inner: sync-inner
+after sync: none
+lwt outer: lwt-outer
+lwt inner: lwt-inner
+after lwt inner: lwt-outer
+after lwt outer: none
+after binds: bind-test

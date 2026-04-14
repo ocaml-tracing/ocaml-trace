@@ -3,11 +3,8 @@ opam-version: "2.0"
 version: "0.12"
 synopsis:
   "A lightweight stub for tracing/observability, agnostic in how data is collected"
-description: """
-ocaml-trace can be used to instrument libraries and programs with low overhead.
-
-              It doesn't do any IO unless a collector is plugged in, which only
-              the final executable should do."""
+description:
+  "ocaml-trace can be used to instrument libraries and programs with low overhead. It doesn't do any IO unless a collector is plugged in, which only the final executable should do."
 maintainer: ["Simon Cruanes"]
 authors: ["Simon Cruanes"]
 license: "MIT"
@@ -21,6 +18,7 @@ depends: [
 ]
 depopts: [
   "unix"
+  "lwt"
   "thread-local-storage" {>= "0.2"}
   "mtime" {>= "2.0"}
 ]
