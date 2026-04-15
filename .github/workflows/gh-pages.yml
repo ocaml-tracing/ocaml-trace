@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Deps
-        run: opam install thread-local-storage trace trace-tef trace-fuchsia ppx_trace
+        run: opam install thread-local-storage lwt trace trace-tef trace-fuchsia ppx_trace
 
       - name: Build
         run: opam exec -- odig odoc --cache-dir=_doc/ trace trace-tef trace-fuchsia ppx_trace

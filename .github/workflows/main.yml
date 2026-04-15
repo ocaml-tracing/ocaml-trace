@@ -40,13 +40,8 @@ jobs:
       - run: opam exec -- dune runtest -p trace-tef,trace-fuchsia
 
       # with depopts
-      - run: opam install hmap thread-local-storage
+      - run: opam install thread-local-storage lwt
       - run: opam exec -- dune build '@install' -p trace,trace-tef,trace-fuchsia
-
-      - run: opam install picos_aux
-        if: ${{ !contains(matrix.container, 'ci-4.') }}
-      - run: opam exec -- dune build '@install' -p trace,trace-tef,trace-fuchsia
-        if: ${{ !contains(matrix.container, 'ci-4.') }}
 
       - run: opam install mtime
       - run: opam exec -- dune build '@install' -p trace,trace-tef,trace-fuchsia
