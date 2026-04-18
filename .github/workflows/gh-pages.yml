@@ -15,6 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - run: opam pin .#HEAD -y -n
       - name: Deps
         run: opam install thread-local-storage lwt trace trace-tef trace-fuchsia ppx_trace
 
