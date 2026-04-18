@@ -9,7 +9,7 @@
 
     {[
       (* new key to track the current span in lwt context *)
-      let k_ambient_span : span Lwt.key = Lwt.new_key ()
+      let k_ambient_span : Trace_core.span Lwt.key = Lwt.new_key ()
 
       (* ambient span provider, install it using Trace_core.set_ambient_context_provider] *)
       let ambient_span_provider : Trace_core.Ambient_span_provider.t =
