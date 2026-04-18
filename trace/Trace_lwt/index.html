@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Trace_lwt (trace.Trace_lwt)</title><meta charset="utf-8"/><link rel="stylesheet" href="../../_odoc-theme/odoc.css"/><meta name="generator" content="odoc 3.1.0"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><script src="../../highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></head><body class="odoc"><nav class="odoc-nav"><a href="../index.html">Up</a> – <a href="../../index.html">Index</a> &#x00BB; <a href="../index.html">trace</a> &#x00BB; Trace_lwt</nav><header class="odoc-preamble"><h1>Module <code><span>Trace_lwt</span></code></h1><p>Optional interface with lwt.</p><p>This provides a Lwt-friendly variant of <a href="../Trace_core/index.html#val-with_span"><code>Trace_core.with_span</code></a>.</p><p>To track the ambient span, which can be useful for some backends or for async spans, you can use <code>Ambient_context_lwt</code>, a collector-specific ambient span provider (eg <code>Opentelemetry_trace</code> comes with one), or define your own like this:</p><pre class="language-ocaml"><code>  (* new key to track the current span in lwt context *)
+  let k_ambient_span : span Lwt.key = Lwt.new_key ()
+
+  (* ambient span provider, install it using Trace_core.set_ambient_context_provider] *)
+  let ambient_span_provider : Trace_core.Ambient_span_provider.t =
+    ASP_some
+      ( (),
+        {
+          get_current_span = (fun () -&gt; Lwt.get k_ambient_span);
+          with_current_span_set_to =
+            (fun () span f -&gt;
+              Lwt.with_value k_ambient_span (Some span) (fun () -&gt; f span));
+        } )</code></pre><ul class="at-tags"><li class="since"><span class="at-tag">since</span> NEXT_RELEASE</li></ul></header><div class="odoc-content"><div class="odoc-spec"><div class="spec value anchored" id="val-with_span"><a href="#val-with_span" class="anchor"></a><code><span><span class="keyword">val</span> with_span : 
+  <span><span class="optlabel">?level</span>:<a href="../Trace_core/Level/index.html#type-t">Trace_core.Level.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?__FUNCTION__</span>:string <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="label">__FILE__</span>:string <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="label">__LINE__</span>:int <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?parent</span>:<span><a href="../Trace_core/index.html#type-span">Trace_core.span</a> option</span> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?params</span>:<span><a href="../Trace_core/index.html#type-extension_parameter">Trace_core.extension_parameter</a> list</span> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?data</span>:<span>(<span>unit <span class="arrow">&#45;&gt;</span></span> <span><span>(string * <a href="../Trace_core/index.html#type-user_data">Trace_core.user_data</a>)</span> list</span>)</span> <span class="arrow">&#45;&gt;</span></span>
+  <span>string <span class="arrow">&#45;&gt;</span></span>
+  <span><span>(<span><a href="../Trace_core/index.html#type-span">Trace_core.span</a> <span class="arrow">&#45;&gt;</span></span> <span><span class="type-var">'a</span> <a href="../../lwt/Lwt/index.html#type-t">Lwt.t</a></span>)</span> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="type-var">'a</span> <a href="../../lwt/Lwt/index.html#type-t">Lwt.t</a></span></span></code></div><div class="spec-doc"><p><code>with_span name f</code> enters a span <code>sp</code>, calls <code>f sp</code> which returns a Lwt promise, and make sure to exit the span <code>sp</code> when <code>f sp</code> exits (or fails).</p><p>This is similar to <a href="../Trace_core/index.html#val-with_span"><code>Trace_core.with_span</code></a> but it respects the promise semnatics of Lwt (ie. it doesn't exit the span immediately instead of waiting for the promise to end).</p><p>To track the current span you still need to install a Lwt-friendly <a href="../Trace_core/Ambient_span_provider/index.html#type-t"><code>Trace_core.Ambient_span_provider.t</code></a> (probably using <a href="../../lwt/Lwt/index.html#val-with_value"><code>Lwt.with_value</code></a>).</p></div></div></div></body></html>
