@@ -3,10 +3,21 @@
 open Test_trace_common
 
 let ( let@ ) = ( @@ )
+let k_ambient_span : Trace_core.span Lwt.key = Lwt.new_key ()
+
+let ambient_span_provider : Trace_core.Ambient_span_provider.t =
+  ASP_some
+    ( (),
+      {
+        get_current_span = (fun () -> Lwt.get k_ambient_span);
+        with_current_span_set_to =
+          (fun () span f ->
+            Lwt.with_value k_ambient_span (Some span) (fun () -> f span));
+      } )
 
 let () =
   print_endline "=== ambient span (Lwt) ===";
-  Trace_core.set_ambient_context_provider Trace_lwt.ambient_span_provider;
+  Trace_core.set_ambient_context_provider ambient_span_provider;
   let coll = make_recorder () in
   let@ () = Trace_core.with_setup_collector coll in
 
