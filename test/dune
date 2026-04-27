@@ -13,6 +13,12 @@
  (libraries trace-tef))
 
 (test
+ (name t_spall)
+ (package trace-spall)
+ (modules t_spall)
+ (libraries trace trace-spall))
+
+(test
  (name t_runtime_events)
  (package trace-runtime-events)
  (modules t_runtime_events)
