@@ -1,3 +1,33 @@
+0.38.0
+------
+
+- Add support for OCaml 5.5 (#622, @patricoferris, @NathanReb)
+
+- Add support for OCaml 5.4 bivariant type parameters, they can now be used
+  alongside ppx-es. (#629, @NathanReb)
+
+- Add `Attribute.Floating.declare_with_attr_loc` and `.declare_with_name_loc`,
+  by analogy to the same functions at top level of `Attribute`. (#631, @ceastlund)
+
+- Migrate `Ptyp_open` nodes using an extension point (#625, @patricoferris)
+
+- Add Ast_builder and Ast_pattern utilities to manipulate encoded
+  effect patterns (#624, @NathanReb)
+
+- Fix a bug where ppat_effects would be encoded/decoded instead of copied by
+  the 5.4 <-> 5.3 migrations (#624, @NathanReb)
+
+- Fix infinite loop when duplicate attributes are present, raising
+  an error instead (#613, @ceastlund, @patricoferris)
+- Ignore extensions inside attributes for the unused extension check
+  (#616, @Skepfyr)
+- Fix a bug that inserted `Location.none` into `Longident`s when using OCaml
+  5.4 and above (#619, @patricoferris)
+
+- Add support for OCaml 5.4 labeled tuples, they can now be used alongside
+  ppx-es. Also adds Ast_builder and Ast_pattern utilities to manipulate them.
+  (#607, @NathanReb)
+
 0.37.0
 ------
 
