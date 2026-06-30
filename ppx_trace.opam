@@ -10,7 +10,7 @@ homepage: "https://github.com/ocaml-tracing/ocaml-trace"
 bug-reports: "https://github.com/ocaml-tracing/ocaml-trace/issues"
 depends: [
   "ocaml" {>= "4.12"}
-  "ppxlib" {>= "0.37" & < "0.38"}
+  "ppxlib" {>= "0.37" & < "0.39"}
   "trace" {= version}
   "trace-tef" {= version & with-test}
   "dune" {>= "2.9"}
