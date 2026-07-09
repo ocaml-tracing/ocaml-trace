@@ -109,4 +109,22 @@
  (tags
   (trace tracing trace runtime-events)))
 
+(package
+ (name trace-spall)
+ (synopsis
+  "A fast binary backend for trace, emitting Spall profiler format (.spall)")
+ (depends
+  (ocaml
+   (>= 4.08))
+  (trace
+   (= :version))
+  (mtime
+   (>= 2.0))
+  (thread-local-storage
+   (>= 0.2))
+  base-unix
+  dune)
+ (tags
+  (trace tracing spall profiling)))
+
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
