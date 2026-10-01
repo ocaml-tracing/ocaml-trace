@@ -1,0 +1,6 @@
+(library
+ (name trace_spall)
+ (public_name trace-spall)
+ (synopsis
+  "A fast binary backend for trace, emitting Spall profiler format (.spall)")
+ (libraries trace.core trace.util unix threads thread-local-storage))
