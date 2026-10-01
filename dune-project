@@ -26,7 +26,9 @@
  (depends
   (ocaml
    (>= 4.08))
-  dune)
+  dune
+  (benchmark :with-dev-setup)
+  (ocamlformat (and (= 0.28.1) :with-dev-setup)))
  (depopts
   unix
   lwt
@@ -96,7 +98,7 @@
 (package
  (name trace-runtime-events)
  (synopsis
-  "A simple collector relying on runtime-events for OCaml 5. Some assembly required.")
+  "A simple collector relying on runtime-events for OCaml 5. Some assembly required")
  (depends
   (ocaml
    (>= 5.1))

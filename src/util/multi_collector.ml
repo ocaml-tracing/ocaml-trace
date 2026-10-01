@@ -22,7 +22,7 @@ open struct
       ~parent name : span =
     let spans =
       Array.map
-        (fun [@ocaml.warning "-8"] coll ->
+        (fun[@ocaml.warning "-8"] coll ->
           let (Collector.C_some (st, cb)) = coll in
           cb.enter_span st ~__FUNCTION__ ~__FILE__ ~__LINE__ ~level ~params
             ~data ~parent name)
